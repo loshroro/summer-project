@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CACY</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#code-form').submit(function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "/send",
+          data: formData,
+          success: function(data) {
+            var result = data.result;
+            $('.progress').css('width', result + '%');
+            $('#receivedString').text(result + '%');
+          },
+          error: function(xhr, status, error) {
+            alert("Произошла ошибка: " + error);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="container-header">
+      <div class="container-navigation">
+        <a class="logo-link" href="https://www.sut.ru">
+          <img src="https://www.sut.ru/new_site/images/og-preview.jpg" alt="Логотип" height="200" width="400">
+        </a>
+        <nav class="navigation">
+          <ul class="navigation-list">
+            <li class="navigation-item"><a class="navigation-link" href="#main">MAIN CONTENT</a></li>
+            <li class="navigation-item"><a class="navigation-link" href="#contacts">CONTACTS</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="container-header-content">
+        <div class="container-header-text">
+          <h1 class="header-title">Code Anti Cheat Yoni</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="page-main">
+    <section class="main-section" id="main">
+      <div class="container-form">
+        <form id="code-form" class="code-form" method="post" action="/send" onsubmit="return submitOnce(this)" >
+          <label for="code" class="form-label">Enter your code without any comments:</label>
+          <textarea class="code-input" name="code" spellcheck="false" cols="50" rows="10"></textarea>
+          <button class="form-button">Submit Code</button>
+      </form>
+      </div>
+      <div class="similarity-meter">
+        <div class="meter">
+          <div class="progress" style="width: 0%;"></div>
+        </div>
+        <p class="percentage" type="text" id="receivedString" readonly> </p>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer" id="contacts">
+    <div class="container-footer-logo">
+        <p class="footer-logo-title">CONTACTS</p>
+    </div>
+    <div class="container-footer">
+      <div class="footer-section">
+        <h3 class="footer-title">Telegram</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="https://t.me/Holorogang" class="footer-link">Сабируллов Булат</a></li>
+          <li class="footer-item"><a href="https://t.me/loshroro" class="footer-link">Воробьев Георгий</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">ВКонтакте</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="https://vk.com/bless_op" class="footer-link">Сабируллов Булат</a></li>
+          <li class="footer-item"><a href="https://vk.com/loshroro" class="footer-link">Воробьев Георгий</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Почта</h3>
+        <ul class="footer-list">
+          <li class="footer-item"><a href="#" class="footer-link">loshroro@mail.ru</a></li>
+          <li class="footer-item"><a href="#" class="footer-link">bulat.sub-2003@yandex.ru</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-contacts">
+      <ul class="contacts-list">
+        <li class="contacts-item">
+            <p class="contacts-text">© CACY. 2024 г.</p>
+        </li>
+      </ul>
+    </div>
+  </footer>
+    <script>
+      function submitOnce(form) {
+        form.submit.disabled = true;
+        return true;
+      }
+    </script>
+</body>
+</html>
